@@ -21,7 +21,7 @@ public class GlobalExceptionHandller {
 			String errorMessage = err.getDefaultMessage();
 			errors.put(feildName, errorMessage);
 		});
-		return new ResponseEntity<Map<String,String>>(errors,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Map<String,String>>(errors,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 //	@ExceptionHandler(EmployeeNotFoundException.class)
