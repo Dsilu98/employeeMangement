@@ -95,7 +95,7 @@ public class EmployeeServiceInfImplement implements EmployeeServiceInf{
 		List<Employee> resultList= new ArrayList<>();
 		for(int i=0;i<empList.size();i++) {
 			Employee e = empList.get(i);
-			if(e.getSalary()<sal)
+			if(e.getSalary()>sal)
 				resultList.add(e);
 		}
 		return resultList;
@@ -111,7 +111,7 @@ public class EmployeeServiceInfImplement implements EmployeeServiceInf{
 		List<Employee> resultList= new ArrayList<>();
 		for(int i=0;i<empList.size();i++) {
 			Employee e = empList.get(i);
-			if(e.getSalary()>sal)
+			if(e.getSalary()<sal)
 				resultList.add(e);
 		}
 		return resultList;

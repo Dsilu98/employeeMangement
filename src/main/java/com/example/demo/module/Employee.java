@@ -1,5 +1,7 @@
 package com.example.demo.module;
 
+import org.springframework.validation.annotation.Validated;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -12,6 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.Getter;
@@ -19,6 +22,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "capgemini_employee")
+@Validated
 //@Data
 //@Getter
 //@Setter
@@ -36,12 +40,10 @@ public class Employee {
 	@NotBlank(message = "Designation can't be blanck")
 	@NotEmpty(message = "Designation can't be empty")
 	private String Designation;
-	@NotBlank(message = "salary can't be blanck")
-	@NotEmpty(message = "salary can't be empty")
+	@NotNull
 	private Long	salary;
 	@Email(message = "Enter a valid email id")
 	private String email;
-	@NotBlank
 	@NotEmpty
 	@Pattern(regexp = "\\d{10}",message = "Mobilenumber must be 10 digits")
 	private String mobile;
@@ -59,9 +61,8 @@ public class Employee {
 			@NotBlank(message = "First name can't be blanck") @NotEmpty(message = "First name can't be empty") String firstName,
 			@NotBlank(message = "Last name can't be blanck") @NotEmpty(message = "Last name can't be empty") String lastName,
 			@NotBlank(message = "Designation can't be blanck") @NotEmpty(message = "Designation can't be empty") String designation,
-			@NotBlank(message = "salary can't be blanck") @NotEmpty(message = "salary can't be empty") Long salary,
-			@Email(message = "Enter a valid email id") String email,
-			@NotBlank @NotEmpty @Pattern(regexp = "\\d{10}", message = "Mobilenumber must be 10 digits") String mobile,
+			@NotNull Long salary, @Email(message = "Enter a valid email id") String email,
+			@NotEmpty @Pattern(regexp = "\\d{10}", message = "Mobilenumber must be 10 digits") String mobile,
 			Address address) {
 		super();
 		this.id = id;

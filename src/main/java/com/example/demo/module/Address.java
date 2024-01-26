@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,7 +18,7 @@ import lombok.Data;
 @Entity
 @Validated
 @Table(name = "capgemini_address")
-@Data
+//@Data
 public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,10 @@ public class Address {
 	@NotBlank
 	@NotEmpty
 	private String pin;
+	
+	@OneToOne(mappedBy = "address")
+	@JsonBackReference()
+	private Employee employee;
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub

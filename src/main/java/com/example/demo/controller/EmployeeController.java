@@ -47,7 +47,7 @@ public class EmployeeController {
 		return new ResponseEntity<List<String>>(result,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/employee{id}")
+	@GetMapping("/employee/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
 		Employee e = controller.getEmployeeById(id);
 		return new ResponseEntity<Employee>(e,HttpStatus.OK);
@@ -59,19 +59,19 @@ public class EmployeeController {
 		return new ResponseEntity<List<Employee>>(empList,HttpStatus.FOUND);
 	}
 	
-	@PutMapping("/employee{id}")
+	@PutMapping("/employee/{id}")
 	public ResponseEntity<String> updateEmployee(@Valid @PathVariable @RequestBody Long id,Employee e){
 		controller.updateEmployeeById(id, e);
 		return new ResponseEntity<String>("Employee with id: "+e.getId()+" has been updated",HttpStatus.OK);
 	}
 	
-	@GetMapping("/employeeSalmore{sal}")
+	@GetMapping("/employeeSalmore/{sal}")
 	public ResponseEntity<List<Employee>> getEmpSalMoreThan(@PathVariable Long sal){
 		List<Employee> empList = controller.getEmployeeSalaryMorethan(sal);
 		return new ResponseEntity<List<Employee>>(empList,HttpStatus.FOUND);
 	}
 	
-	@GetMapping("/employeeSalless{sal}")
+	@GetMapping("/employeeSalless/{sal}")
 	public ResponseEntity<List<Employee>> getEmpSalLessThan(@PathVariable Long sal){
 		List<Employee> empList = controller.getEmployeeSalaryLessthan(sal);
 		return new ResponseEntity<List<Employee>>(empList,HttpStatus.FOUND);
