@@ -8,10 +8,10 @@ public interface EmployeeServiceInf {
 	public void addEmployee(Employee e);
 	public void addAllEmployee(List<Employee> e);
 	public Employee getEmployeeById(Long id);
-	public List<Employee> gettAllEmployee();
-	public String updateEmployeeById(Long id, Employee e);
-	public String deleteEmployeeById(Long id);
-	public String deleteEmployee();
+	public List<Employee> getAllEmployee();
+	public boolean updateEmployeeById(Long id, Employee e);
+	public boolean deleteEmployeeById(Long id);
+	public boolean deleteEmployee();
 	
 	//filter employee if their salary is greater than 
 	public List<Employee> getEmployeeSalaryMorethan(Long sal);
@@ -19,9 +19,9 @@ public interface EmployeeServiceInf {
 	//filter employee if their salary is less than 
 	public List<Employee> getEmployeeSalaryLessthan(Long sal);
 	//Asc employee based their state
-	public List<Employee> employeeAscState(Long sal);
+	public List<Employee> employeeAscState();
 	//Desc employee based their state
-	public List<Employee> employeeDescState(Long sal);
+	public List<Employee> employeeDescState();
 	
 	//Get employee in ascending order (name,state,salary,mobilenumber)
 	public List<Employee> getEmployeeAsc();

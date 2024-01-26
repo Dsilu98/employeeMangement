@@ -24,6 +24,8 @@ public class GlobalExceptionHandller {
 		return new ResponseEntity<Map<String,String>>(errors,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-//	@ExceptionHandler(EmployeeNotFoundException.class)
-//	public ResponseEntity<T>
+	@ExceptionHandler(EmployeeNotFoundException.class)
+	public ResponseEntity<String> handleEmployeeNotFoundException(EmployeeNotFoundException ex){
+		return new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
+	}
 }
