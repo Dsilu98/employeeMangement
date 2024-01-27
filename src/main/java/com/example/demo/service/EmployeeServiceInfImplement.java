@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -56,9 +57,12 @@ public class EmployeeServiceInfImplement implements EmployeeServiceInf{
 			throw new EmployeeNotFoundException("Employee with id : "+id+" is not present");
 		}
 		Employee savedEmployee = getEmployeeById(id);
-		Long temp = savedEmployee.getId();
-		savedEmployee = e;
-		savedEmployee.setId(e.getId());
+		savedEmployee.setFirstName(e.getFirstName());
+		savedEmployee.setLastName(e.getLastName());
+		savedEmployee.setDesignation(e.getDesignation());
+		savedEmployee.setSalary(e.getSalary());
+		savedEmployee.setMobile(e.getMobile());
+		savedEmployee.setAddress(e.getAddress());
 		return result;
 	}
 
@@ -157,53 +161,49 @@ public class EmployeeServiceInfImplement implements EmployeeServiceInf{
 			throw new EmployeeNotFoundException("There is no data present in this ");
 		}
 		List<Employee> empList = getAllEmployee();
-		Collections.sort(empList, new Comparator<Employee>() {
-			@Override
-			public int compare(Employee e1, Employee e2) {
-				int firstNameCompare = e1.getFirstName().compareToIgnoreCase(e2.getFirstName());
-				if(firstNameCompare!=0)
-					return firstNameCompare;
-				int stateCompare = e1.getAddress().getState().compareToIgnoreCase(e2.getAddress().getState());
-				if(stateCompare!=0)
-					return stateCompare;
-				int salryCompare = Long.compare(e1.getSalary(),e2.getSalary());
-				if(salryCompare!=0)
-					return salryCompare;
-				int designationCompare = e1.getDesignation().compareToIgnoreCase(e2.getDesignation());
-				if(designationCompare!=0)
-					return designationCompare;
-				return e1.getMobile().compareTo(e2.getMobile());
-			}
-		});
+		empList = empList.stream().sorted((e1,e2)->{
+			int firstNameCompare = e1.getFirstName().compareToIgnoreCase(e2.getFirstName());
+			if(firstNameCompare!=0)
+				return firstNameCompare;
+			int stateCompare = e1.getAddress().getState().compareToIgnoreCase(e2.getAddress().getState());
+			if(stateCompare!=0)
+				return stateCompare;
+			int salryCompare = Long.compare(e1.getSalary(),e2.getSalary());
+			if(salryCompare!=0)
+				return salryCompare;
+			int designationCompare = e1.getDesignation().compareToIgnoreCase(e2.getDesignation());
+			if(designationCompare!=0)
+				return designationCompare;
+			return e1.getMobile().compareTo(e2.getMobile());
+		})
+		.collect(Collectors.toList());
 		return empList;
-
 	}
 
 	@Override
 	public List<Employee> getEmployeeDesc() {
 		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		if(dao.count()==0) {
 			throw new EmployeeNotFoundException("There is no data present in this ");
 		}
 		List<Employee> empList = getAllEmployee();
-		Collections.sort(empList, new Comparator<Employee>() {
-			@Override
-			public int compare(Employee e1, Employee e2) {
-				int firstNameCompare = e1.getFirstName().compareToIgnoreCase(e2.getFirstName());
-				if(firstNameCompare!=0)
-					return -firstNameCompare;
-				int stateCompare = e1.getAddress().getState().compareToIgnoreCase(e2.getAddress().getState());
-				if(stateCompare!=0)
-					return -stateCompare;
-				int salryCompare = Long.compare(e1.getSalary(),e2.getSalary());
-				if(salryCompare!=0)
-					return -salryCompare;
-				int designationCompare = e1.getDesignation().compareToIgnoreCase(e2.getDesignation());
-				if(designationCompare!=0)
-					return -designationCompare;
-				return -e1.getMobile().compareTo(e2.getMobile());
-			}
-		});
+		empList = empList.stream().sorted((e1,e2)->{
+			int firstNameCompare = e1.getFirstName().compareToIgnoreCase(e2.getFirstName());
+			if(firstNameCompare!=0)
+				return -firstNameCompare;
+			int stateCompare = e1.getAddress().getState().compareToIgnoreCase(e2.getAddress().getState());
+			if(stateCompare!=0)
+				return -stateCompare;
+			int salryCompare = Long.compare(e1.getSalary(),e2.getSalary());
+			if(salryCompare!=0)
+				return -salryCompare;
+			int designationCompare = e1.getDesignation().compareToIgnoreCase(e2.getDesignation());
+			if(designationCompare!=0)
+				return -designationCompare;
+			return -e1.getMobile().compareTo(e2.getMobile());
+		})
+		.collect(Collectors.toList());
 		return empList;
 	}
 
